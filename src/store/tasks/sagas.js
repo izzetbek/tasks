@@ -18,6 +18,7 @@ import { deleteSubtask, fetchSubTasks } from 'api/subTasks'
 export function* getTasks() {
   try {
     yield put(requestStarted())
+
     const tasks = yield call(fetchTasks)
 
     yield put(tasksReceived(tasks))
@@ -30,6 +31,8 @@ export function* getTasks() {
 
 export function* addTask() {
   try {
+    yield put(requestStarted())
+
     const task = yield call(createTask)
 
     yield put(taskAdded(task))
@@ -42,6 +45,8 @@ export function* addTask() {
 
 export function* getSubtasks(action) {
   try {
+    yield put(requestStarted())
+
     const subtasks = yield call(fetchSubTasks, action.payload.id)
 
     yield put(subTasksReceived(subtasks))
@@ -54,6 +59,8 @@ export function* getSubtasks(action) {
 
 export function* removeSubtask(action) {
   try {
+    yield put(requestStarted())
+
     const subtask = yield call(deleteSubtask, action.payload.id)
 
     yield put(subtaskDeleted(subtask))
